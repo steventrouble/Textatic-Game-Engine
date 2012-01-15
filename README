@@ -1,0 +1,9 @@
+SLOTBA v0.01
+
+Super Library of Text-Based Awesomeness
+
+To compile, open up with Visual Studio, then link in the GLFW and OpenGl 
+libraries and dlls.
+
+More to come later.
+
