@@ -11,6 +11,8 @@
 
 using namespace std;
 
+const int swapSteps = 8;
+
 int SConsole::createConsole(string title) {
 	//glutInitWindowPosition(-1,-1);
 	glfwInit();
@@ -86,21 +88,64 @@ void SConsole::moveChar(int x1, int y1, int x2, int y2)
 	SConsoleRect rect = {x1,y1,x2,y2};
 	float ii = (float) x1;
 	float jj = (float) y1;
+	float istep = (float) (x2-x1)/((float) swapSteps);
+	float jstep = (float) (y2-y1)/((float) swapSteps);
 	glfwSwapInterval(1);
-	bool xneg = (x1-x2 < 0);
-	bool yneg = (y1-y2 < 0);
-	for (;; ii += ((x2-x1)/5.0f), jj += ((y2-y1)/5.0f)) {
-		if ((xneg ? ii >= x2 : ii <= x2) && (yneg ? jj >= y2 : jj <= y2)) break;
+	for (int iter = 0; iter < swapSteps; iter++) {
 		m_renderQueue->push_back(rect);
 		refreshNoSwap();
 		m_font->putChar(toSwap, (int) x1, y1);
-		m_font->putChar(toMove, ii, jj);
+		m_font->putChar(toMove, ii+=istep, jj+=jstep);
 		glfwSwapBuffers();
 	}
 	glfwSwapInterval(0);
 	putChar(toSwap,x1,y1);
 	putChar(toMove,x2,y2);
 	refresh();
+	return;
+}
+
+#define mkArr(type,name,size) type *name = new type[size];
+#define foreach for (int i=0; i < len; i++)
+#define x1i arr[i].x1
+#define x2i arr[i].x2
+#define y1i arr[i].y1
+#define y2i arr[i].y2
+
+void SConsole::moveChars(SConsoleRect arr[], int len) 
+{
+	mkArr(short,toMove,len);
+	short *toSwap = new short[len];
+	foreach toMove[i] = m_terminalChars[x1i+y1i*m_charsWide];
+	foreach toSwap[i] = m_terminalChars[x2i+y2i*m_charsWide];
+	mkArr(float,ii,len);
+	mkArr(float,jj,len);
+	mkArr(float,istep,len);
+	mkArr(float,jstep,len);
+	foreach ii[i] = x1i;
+	foreach jj[i] = y1i;
+	foreach istep[i] = (x2i-x1i)/((float) swapSteps);
+	foreach jstep[i] = (y2i-y1i)/((float) swapSteps);
+	SConsoleRect all = {0,0,m_charsWide,m_charsTall};
+	glfwSwapInterval(1);
+	for (int iter = 0; iter < swapSteps; iter++) {
+		m_renderQueue->push_back(all);
+		refreshNoSwap();
+		foreach m_font->putChar(toSwap[i], (int) x1i, y1i);
+		foreach m_font->putChar(toMove[i], ii[i]+=istep[i], jj[i]+=jstep[i]);
+		glfwSwapBuffers();
+	}
+	glfwSwapInterval(0);
+	foreach putChar(toSwap[i],x1i,y1i);
+	foreach putChar(toMove[i],x2i,y2i);
+	refresh();
+
+	delete[] toMove;
+	delete[] toSwap;
+	delete[] ii;
+	delete[] jj;
+	delete[] istep;
+	delete[] jstep;
 	return;
 }
 
@@ -151,6 +196,28 @@ void SConsole::refreshNoSwap() {
 
 
 /////////////////////////////////////////////////////
+void printAboutScreen(SConsole& console) {
+#include "about.h"
+	short *arr = new short[40*80];
+	for (int i = 0; i < 40*80; i++)
+		arr[i] = muffins[i];
+	SConsoleRect *swappers = new SConsoleRect[20*80];
+	for (int i = 0; i < 20; i++) {
+		for (int j = 0; j < 80; j++) {
+		swappers[i*80+j].x1 = j;
+		swappers[i*80+j].y1 = i*2;
+		swappers[i*80+j].x2 = j;
+		swappers[i*80+j].y2 = i*2+1;
+		}
+	}
+	console.conCpy(arr);
+	console.moveChars(swappers, 20*80);
+	console.moveChars(swappers, 20*80);
+	console.refresh();
+	delete[] arr;	
+	delete[] swappers;
+}
+
 struct player {
 	int x, y, ch;
 };
@@ -158,11 +225,36 @@ struct player {
 player dudette = {1,1,'@'};
 
 struct keys {
-	int up, down, left, right, esc;
+	int up, down, left, right, esc, f1, f2;
 };
 
 keys oldk;
-keys newk = {false, false, false, false, false};
+keys newk = {false, false, false, false, false, false, false};
+
+inline int m(int i, int j) {
+	// i in (3,77)c35
+	// j in (3,22)c7.5
+	double x0 = ((i-3)/21.14)-2.5;
+	double y0 = ((j-1)/19.0)-1;
+
+	double x = 0;
+	double y = 0;
+
+	int iteration = 0;
+	const int max_iteration = 1000;
+
+	while ( x*x + y*y < 4  &&  iteration < max_iteration ) //Remember: 4 == (2*2)
+	{
+		double xtemp = x*x - y*y + x0;
+		y = 2*x*y + y0;
+
+		x = xtemp;
+
+		iteration++;
+	}
+
+	return (iteration/100)?(iteration/100)+'0'-1:-1;
+}
 
 // Test functions
 bool controlPlayer(SConsole& console) {
@@ -195,35 +287,33 @@ bool controlPlayer(SConsole& console) {
 		dudette.x++;
 		return false;
 	}
+	newk.f1 = glfwGetKey(GLFW_KEY_F1);
+	if (!oldk.f1 && newk.f1) {
+		printAboutScreen(console);
+		dudette.x = 1;
+		dudette.y = 1;
+		dudette.ch = 0;
+		console.putChar(dudette.ch,dudette.x,dudette.y);
+		return false;
+	}
+	newk.f2 = glfwGetKey(GLFW_KEY_F2);
+	if (!oldk.f2 && newk.f2) {
+		console.fillRect('.',1,1,78,38);
+		dudette.x = 1;
+		dudette.y = 1;
+		dudette.ch = '@';
+		short arr[80*40];
+		for (int j = 0; j < 40; j++)
+			for (int i = 0; i < 80; i++)
+				arr[i+j*80] = (i>3&&i<77&&j>1&&j<39)?m(i,j):-1;
+		console.conCpy(arr);
+		console.putChar(dudette.ch,dudette.x,dudette.y);
+		return false;
+	}
 	return false;
 }
 
 double thresh = 4.0;
-
-inline int m(int i, int j) {
-	// i in (3,77)c35
-	// j in (3,22)c7.5
-	double x0 = ((i-3)/21.14)-2.5;
-	double y0 = ((j-1)/19.0)-1;
-
-	double x = 0;
-	double y = 0;
-
-	int iteration = 0;
-	const int max_iteration = 1000;
-
-	while ( x*x + y*y < 4  &&  iteration < max_iteration ) //Remember: 4 == (2*2)
-	{
-		double xtemp = x*x - y*y + x0;
-		y = 2*x*y + y0;
-
-		x = xtemp;
-
-		iteration++;
-	}
-
-	return (iteration/100)?(iteration/100)+'0'-1:-1;
-}
 
 #define makeStaticArray(x) charPos x[] = {{
 #define and },{

@@ -79,6 +79,7 @@ public:
 	 *	Automatically calls refresh()
 	 */
 	void moveChar(int x1, int y1, int x2, int y2);
+	void moveChars(SConsoleRect arr[], int len);
 
 	/**	SConsole::fillRect()
 	 *	Fill an entire rectangle on the screen with a single character

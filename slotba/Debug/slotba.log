@@ -1,0 +1,39 @@
+﻿Build started 1/17/2012 6:56:12 PM.
+     1>Project "C:\Users\steventrouble\Documents\Visual Studio 2010\Projects\slotba\slotba\slotba.vcxproj" on node 2 (build target(s)).
+     1>InitializeBuildStatus:
+         Creating "Debug\slotba.unsuccessfulbuild" because "AlwaysCreate" was specified.
+       ClCompile:
+         c:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /Od /Oy- /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc100.pdb" /Gd /TP /analyze- /errorReport:prompt SConsole.cpp
+         SConsole.cpp
+     1>c:\users\steventrouble\documents\visual studio 2010\projects\slotba\slotba\sconsole.cpp(125): warning C4244: '=' : conversion from 'int' to 'float', possible loss of data
+     1>c:\users\steventrouble\documents\visual studio 2010\projects\slotba\slotba\sconsole.cpp(126): warning C4244: '=' : conversion from 'int' to 'float', possible loss of data
+       Link:
+         c:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\steventrouble\Documents\Visual Studio 2010\Projects\slotba\Debug\slotba.exe" /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib glfw.lib opengl32.lib user32.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /ManifestFile:"Debug\slotba.exe.intermediate.manifest" /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /DEBUG /PDB:"C:\Users\steventrouble\Documents\Visual Studio 2010\Projects\slotba\Debug\slotba.pdb" /SUBSYSTEM:WINDOWS /TLBID:1 /ENTRY:"mainCRTStartup" /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\steventrouble\Documents\Visual Studio 2010\Projects\slotba\Debug\slotba.lib" /MACHINE:X86 Debug\SConsole.obj
+         Debug\SConsoleFont.obj
+         LINK : C:\Users\steventrouble\Documents\Visual Studio 2010\Projects\slotba\Debug\slotba.exe not found or not built by the last incremental link; performing full link
+     1>LINK : warning LNK4098: defaultlib 'MSVCRT' conflicts with use of other libs; use /NODEFAULTLIB:library
+     1>glfw.lib(enable.obj) : warning LNK4099: PDB 'vc100.pdb' was not found with 'glfw.lib(enable.obj)' or at 'C:\Users\steventrouble\Documents\Visual Studio 2010\Projects\slotba\Debug\vc100.pdb'; linking object as if no debug info
+     1>glfw.lib(glext.obj) : warning LNK4099: PDB 'vc100.pdb' was not found with 'glfw.lib(glext.obj)' or at 'C:\Users\steventrouble\Documents\Visual Studio 2010\Projects\slotba\Debug\vc100.pdb'; linking object as if no debug info
+     1>glfw.lib(image.obj) : warning LNK4099: PDB 'vc100.pdb' was not found with 'glfw.lib(image.obj)' or at 'C:\Users\steventrouble\Documents\Visual Studio 2010\Projects\slotba\Debug\vc100.pdb'; linking object as if no debug info
+     1>glfw.lib(init.obj) : warning LNK4099: PDB 'vc100.pdb' was not found with 'glfw.lib(init.obj)' or at 'C:\Users\steventrouble\Documents\Visual Studio 2010\Projects\slotba\Debug\vc100.pdb'; linking object as if no debug info
+     1>glfw.lib(input.obj) : warning LNK4099: PDB 'vc100.pdb' was not found with 'glfw.lib(input.obj)' or at 'C:\Users\steventrouble\Documents\Visual Studio 2010\Projects\slotba\Debug\vc100.pdb'; linking object as if no debug info
+     1>glfw.lib(stream.obj) : warning LNK4099: PDB 'vc100.pdb' was not found with 'glfw.lib(stream.obj)' or at 'C:\Users\steventrouble\Documents\Visual Studio 2010\Projects\slotba\Debug\vc100.pdb'; linking object as if no debug info
+     1>glfw.lib(tga.obj) : warning LNK4099: PDB 'vc100.pdb' was not found with 'glfw.lib(tga.obj)' or at 'C:\Users\steventrouble\Documents\Visual Studio 2010\Projects\slotba\Debug\vc100.pdb'; linking object as if no debug info
+     1>glfw.lib(win32_enable.obj) : warning LNK4099: PDB 'vc100.pdb' was not found with 'glfw.lib(win32_enable.obj)' or at 'C:\Users\steventrouble\Documents\Visual Studio 2010\Projects\slotba\Debug\vc100.pdb'; linking object as if no debug info
+     1>glfw.lib(win32_fullscreen.obj) : warning LNK4099: PDB 'vc100.pdb' was not found with 'glfw.lib(win32_fullscreen.obj)' or at 'C:\Users\steventrouble\Documents\Visual Studio 2010\Projects\slotba\Debug\vc100.pdb'; linking object as if no debug info
+     1>glfw.lib(win32_glext.obj) : warning LNK4099: PDB 'vc100.pdb' was not found with 'glfw.lib(win32_glext.obj)' or at 'C:\Users\steventrouble\Documents\Visual Studio 2010\Projects\slotba\Debug\vc100.pdb'; linking object as if no debug info
+     1>glfw.lib(win32_init.obj) : warning LNK4099: PDB 'vc100.pdb' was not found with 'glfw.lib(win32_init.obj)' or at 'C:\Users\steventrouble\Documents\Visual Studio 2010\Projects\slotba\Debug\vc100.pdb'; linking object as if no debug info
+     1>glfw.lib(win32_time.obj) : warning LNK4099: PDB 'vc100.pdb' was not found with 'glfw.lib(win32_time.obj)' or at 'C:\Users\steventrouble\Documents\Visual Studio 2010\Projects\slotba\Debug\vc100.pdb'; linking object as if no debug info
+     1>glfw.lib(win32_window.obj) : warning LNK4099: PDB 'vc100.pdb' was not found with 'glfw.lib(win32_window.obj)' or at 'C:\Users\steventrouble\Documents\Visual Studio 2010\Projects\slotba\Debug\vc100.pdb'; linking object as if no debug info
+     1>glfw.lib(window.obj) : warning LNK4099: PDB 'vc100.pdb' was not found with 'glfw.lib(window.obj)' or at 'C:\Users\steventrouble\Documents\Visual Studio 2010\Projects\slotba\Debug\vc100.pdb'; linking object as if no debug info
+         slotba.vcxproj -> C:\Users\steventrouble\Documents\Visual Studio 2010\Projects\slotba\Debug\slotba.exe
+       Manifest:
+         C:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\bin\mt.exe /nologo /verbose /outputresource:"C:\Users\steventrouble\Documents\Visual Studio 2010\Projects\slotba\Debug\slotba.exe;#1" /manifest Debug\slotba.exe.intermediate.manifest
+       FinalizeBuildStatus:
+         Deleting file "Debug\slotba.unsuccessfulbuild".
+         Touching "Debug\slotba.lastbuildstate".
+     1>Done Building Project "C:\Users\steventrouble\Documents\Visual Studio 2010\Projects\slotba\slotba\slotba.vcxproj" (build target(s)).
+
+Build succeeded.
+
+Time Elapsed 00:00:00.76

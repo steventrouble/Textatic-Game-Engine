@@ -63,6 +63,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="about.h" />
     <ClInclude Include="SConsole.h" />
     <ClInclude Include="SConsoleFont.h" />
   </ItemGroup>

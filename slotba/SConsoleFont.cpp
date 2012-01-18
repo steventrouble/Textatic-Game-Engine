@@ -1,5 +1,4 @@
 #include "SConsoleFont.h"
-#include "lodepng.h"
 
 #include "GL/glfw.h"
 #include <GL/GL.h>
