@@ -1,7 +1,5 @@
 I know nothing about licenses and have homework to do, but the licence of this
 is as follows: To use, you must do everything in your power to make sure that
 this project follows all rules of its parent libraries, especially GLFW and 
-OpenGL. This means sending me an email at "steventrouble at gmail dot com" with
-instructions on how to make this follow their licenses and stuff. Else, next 
-time I have more time, I'll do it on my own.
-
+OpenGL. If necessary, this includes sending me an email at "steventrouble at gmail dot com" with
+instructions on how to make this follow their licenses, if I am not already. 
