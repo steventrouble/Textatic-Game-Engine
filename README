@@ -1,3 +1,3 @@
 Textatic is a C++ library for people who want to create efficient text-based games.
 This framework uses OpenGL to render text directly, and is far more efficient
-that rendering to a CLI using e.g. ncurses.
+than rendering to a CLI using e.g. ncurses.
